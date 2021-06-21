@@ -1,18 +1,26 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="mt-5">
+    <current-temperature />
+    <br>
+    <five-day-temperatures />
+    <b-row>
+      <b-col>
+        <search-form />
+      </b-col>
+    </b-row>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import CurrentTemperature from '../components/weather/CurrentTemperature.vue'
+import FiveDayTemperatures from '../components/weather/FiveDayTemperatures.vue'
+import SearchForm from '../components/weather/SearchForm.vue'
 export default {
   name: 'Home',
   components: {
-    HelloWorld
+    CurrentTemperature,
+    FiveDayTemperatures,
+    SearchForm
   }
 }
 </script>
