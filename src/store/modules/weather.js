@@ -21,11 +21,11 @@ export const weatherModule = {
         },
         setFiveDayWeatherForecast(state, payload) {
             state.fiveDayWeatherForecast = payload;
-        },
+        }
     },
     getters: {
         currentWeatherForecast: state => { return state.currentWeatherForecast },
-        fiveDayWeatherForecast: state => { return state.fiveDayWeatherForecast }
+        fiveDayWeatherForecast: state => { return state.fiveDayWeatherForecast },
     },
     actions: {
         async getCurrentWeatherForecast({ commit, state }, payload) {
@@ -40,12 +40,16 @@ export const weatherModule = {
         },
         async getFiveDayWeatherForecast({ commit, state }, payload) {
             const API_KEY = `${process.env.VUE_APP_OPEN_WEATHER_API_KEY}`;
+            // const batch = (array) => 
+            //     Array.from({ length: Math.ceil(array / 5) }, 
+            //         (_, index) => array.slice(index * 5, index * 5 + 5));
+
             let url = payload.latitude && payload.longitude
                 ? state.urls.fiveDayWeatherForecastLatLonURL(payload.latitude, payload.longitude, API_KEY)
                 : state.urls.fiveDayWeatherForecastCityURL(payload.cityName, API_KEY)
             await fetch(url)
                 .then(response => response.json())
-                .then(result => commit('setFiveDayWeatherForecast', result))
+                .then(result => commit('setFiveDayWeatherForecast', result.list))
                 .catch(error => console.log(error));
         }
     }
