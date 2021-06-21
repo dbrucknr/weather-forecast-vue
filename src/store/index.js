@@ -47,7 +47,10 @@ export default new Vuex.Store({
       const { latitude, longitude } = payload.coords;
       commit('setBrowserCoordinates', { latitude, longitude });
       getters.locationData 
-        ? this.dispatch('weatherForecast/getCurrentWeatherForecast', getters.locationData)
+        ? (this.dispatch('weatherForecast/getCurrentWeatherForecast', getters.locationData) 
+          &&
+          this.dispatch('weatherForecast/getFiveDayWeatherForecast', getters.locationData)
+        )
         : null
     },
     async processGeoEncodedData({ commit, state, getters }) {

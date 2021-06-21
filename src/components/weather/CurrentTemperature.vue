@@ -10,11 +10,6 @@
           {{ currentWeatherForecast.main }}
         </b-col>
       </b-row>
-
-      <b-card-text>A second paragraph of text in the card.</b-card-text>
-
-      <a href="#" class="card-link">Card link</a>
-      <b-link href="#" class="card-link">Another link</b-link>
     </b-card>
   </b-overlay>
 </div>

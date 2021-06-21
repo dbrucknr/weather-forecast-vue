@@ -8,6 +8,8 @@ export const weatherModule = {
                 `https://api.openweathermap.org/data/2.5/weather?lat=${ latitude }&lon=${ longitude }&units=imperial&APPID=${ APIkey }`,
             fiveDayWeatherForecastCityURL: (cityName, APIkey) => 
                 `https://api.openweathermap.org/data/2.5/forecast?q=${ cityName }&units=imperial&APPID=${ APIkey }`,
+            fiveDayWeatherForecastLatLonURL: (latitude, longitude, APIkey) => 
+                `https://api.openweathermap.org/data/2.5/forecast?lat=${ latitude }&lon=${ longitude }&units=imperial&APPID=${ APIkey }`,
             weatherForecastIconURL: (iconCode) => `http://openweathermap.org/img/wn/${ iconCode }@2x.png`
         },
         currentWeatherForecast: {},
@@ -38,12 +40,13 @@ export const weatherModule = {
         },
         async getFiveDayWeatherForecast({ commit, state }, payload) {
             const API_KEY = `${process.env.VUE_APP_OPEN_WEATHER_API_KEY}`;
-            await fetch(
-                state.urls.fiveDayWeatherForecastCityURL(payload.cityName, API_KEY)
-            )
-            .then(response => response.json())
-            .then(result => commit('setFiveDayWeatherForecast', result))
-            .catch(error => console.log(error));
+            let url = payload.latitude && payload.longitude
+                ? state.urls.fiveDayWeatherForecastLatLonURL(payload.latitude, payload.longitude, API_KEY)
+                : state.urls.fiveDayWeatherForecastCityURL(payload.cityName, API_KEY)
+            await fetch(url)
+                .then(response => response.json())
+                .then(result => commit('setFiveDayWeatherForecast', result))
+                .catch(error => console.log(error));
         }
     }
 
