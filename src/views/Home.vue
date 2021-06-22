@@ -1,13 +1,24 @@
 <template>
   <div class="mt-5">
-    <current-temperature />
+    <b-container>
+      <b-row>
+        <b-col>
+          <current-temperature />
+        </b-col>
+        <b-col>
+          <search-form />
+        </b-col>
+      </b-row>
+    </b-container>
     <br>
-    <five-day-temperatures />
-    <b-row>
+    <b-container fluid>
+      <five-day-temperatures />
+    </b-container>
+    <!-- <b-row>
       <b-col>
         <search-form />
       </b-col>
-    </b-row>
+    </b-row> -->
   </div>
 </template>
 

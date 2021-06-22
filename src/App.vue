@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <navigation />
-      <b-container>
         <router-view />
-      </b-container>
     <the-footer />
   </div>
 </template>

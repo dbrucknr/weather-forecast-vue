@@ -49,8 +49,8 @@ export default new Vuex.Store({
       console.log(getters)
       getters.locationData 
         ? (this.dispatch('weatherForecast/getCurrentWeatherForecast', getters.locationData) 
-          // &&
-          // this.dispatch('weatherForecast/getFiveDayWeatherForecast', getters.locationData)
+          &&
+          this.dispatch('weatherForecast/getFiveDayWeatherForecast', getters.locationData)
         )
         : null
     },
