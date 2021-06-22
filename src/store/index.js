@@ -35,6 +35,7 @@ export default new Vuex.Store({
           (data) => {
             dispatch('extractCoordinates', data);
             dispatch('processGeoEncodedData');
+            commit('setUsingAutoLocation', true);
           }, 
           console.log
         );
@@ -46,7 +47,6 @@ export default new Vuex.Store({
     extractCoordinates({ commit, getters }, payload) {
       const { latitude, longitude } = payload.coords;
       commit('setBrowserCoordinates', { latitude, longitude });
-      console.log(getters)
       getters.locationData 
         ? (this.dispatch('weatherForecast/getCurrentWeatherForecast', getters.locationData) 
           &&
