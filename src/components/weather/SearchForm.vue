@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-card title="Search Forecasts" bg-variant="light">
+        <b-card bg-variant="light">
             <b-form>
                 <b-form-group
                     id="city-search"
@@ -43,7 +43,7 @@ export default {
         onSubmit(event) {
             console.log(event)
         },
-        onReser(event) {
+        onReset(event) {
             console.log(event)
         }
     }

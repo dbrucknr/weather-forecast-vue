@@ -6,33 +6,27 @@
     <b-card title="5 Day Forecast" :sub-title="cityStateLocation ? cityStateLocation.city + ', ' + cityStateLocation.principalSubdivision : null">
       <b-card-group deck>
         <b-card v-if="weekdays.Monday" title="Monday" :sub-title="weekdays.Monday.date"> -->
-          <!-- {{ weekdays.Monday }} -->
           <weekday-weather-card :weekdayWeather="weekdays.Monday" />
         </b-card>
-        <b-card>
-          <b-card-body title="Tuesday" :sub-title="weekdays.Tuesday.date">
-            <b-card-text>
-              {{ weekdays.Tuesday }}
-            </b-card-text>
-          </b-card-body>
+        <b-card v-if="weekdays.Tuesday" title="Tuesday" :sub-title="weekdays.Tuesday.date">
+          <weekday-weather-card :weekdayWeather="weekdays.Tuesday" />
         </b-card>
-        <b-card title="Wednesday" :sub-title="weekdays.Wednesday.date">
-          <!-- {{ weekdays.Wednesday }} -->
+        <b-card v-if="weekdays.Wednesday" title="Wednesday" :sub-title="weekdays.Wednesday.date">
           <weekday-weather-card :weekdayWeather="weekdays.Wednesday" />
         </b-card>
-        <b-card title="Thursday" :sub-title="weekdays.Thursday.date">
-          {{ weekdays.Thursday }}
+        <b-card v-if="weekdays.Thursday" title="Thursday" :sub-title="weekdays.Thursday.date">
+          <weekday-weather-card :weekdayWeather="weekdays.Thursday" />
         </b-card>
       </b-card-group>
       <b-card-group deck>
-        <b-card title="Friday" :sub-title="weekdays.Friday.date">
-          {{ weekdays.Friday }}
+        <b-card v-if="weekdays.Friday" title="Friday" :sub-title="weekdays.Friday.date">
+          <weekday-weather-card :weekdayWeather="weekdays.Friday" />
         </b-card>
-        <b-card title="Saturday" :sub-title="weekdays.Saturday.date">
-          {{ weekdays.Saturday }}
+        <b-card v-if="weekdays.Saturday" title="Saturday" :sub-title="weekdays.Saturday.date">
+          <weekday-weather-card :weekdayWeather="weekdays.Saturday" />
         </b-card>
         <b-card v-if="weekdays.Sunday" title="Sunday" :sub-title="weekdays.Sunday.date">
-          {{ weekdays.Sunday }}
+          <weekday-weather-card :weekdayWeather="weekdays.Sunday" />
         </b-card>
       </b-card-group>
     </b-card>
