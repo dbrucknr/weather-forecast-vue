@@ -31,7 +31,19 @@
                         required
                     />
                 </b-form-group>
-
+                <b-form-group
+                    id="country-search"
+                    label="Country:"
+                    label-for="country-input"
+                    description="Enter the country code in which the city exists. (Defaults to United States)"
+                >
+                    <b-form-input
+                        id="country-input"
+                        type="text"
+                        v-model="countrySearchText"
+                        label="Enter Country Code"
+                    />
+                </b-form-group>
                 <b-button type="submit" variant="primary" @click.prevent="handleSubmit">Search</b-button>
                 <b-button type="reset" variant="danger" @click.prevent="handleReset">Reset</b-button>
             </b-form>
@@ -50,7 +62,7 @@ export default {
         }
     },
     computed : {
-        ...mapGetters('weatherForecast', ['getCitySearchText', 'getStateSearchText']),
+        ...mapGetters('weatherForecast', ['getCitySearchText', 'getStateSearchText', 'getCountrySearchText']),
         citySearchText: {
             get() { return this.getCitySearchText },
             set(value) { this.setCityInput(value) }
@@ -58,18 +70,22 @@ export default {
         stateSearchText: {
             get() { return this.getStateSearchText },
             set(value) { this.setStateInput(value) }
+        },
+        countrySearchText: {
+            get() { return this.getCountrySearchText },
+            set(value) { this.setCountryInput(value) }
         }
     },
     methods: {
         ...mapMutations(['setGeoEncodedLocationData', 'setUsingAutoLocation']),
-        ...mapMutations('weatherForecast', ['setCityInput', 'setStateInput']),
+        ...mapMutations('weatherForecast', ['setCityInput', 'setStateInput', 'setCountryInput']),
         ...mapActions('weatherForecast', ['getCurrentWeatherForecast', 'getFiveDayWeatherForecast']),
         async handleSubmit() {
             this.loading = true;
             this.setGeoEncodedLocationData({'city': this.citySearchText, 'principalSubdivision': this.stateSearchText});
             this.setUsingAutoLocation(false);
-            await this.getCurrentWeatherForecast({'city': this.citySearchText, 'state': this.stateSearchText});
-            await this.getFiveDayWeatherForecast({'city': this.citySearchText, 'state': this.stateSearchText});
+            await this.getCurrentWeatherForecast({ 'city': this.citySearchText, 'state': this.stateSearchText, 'country': this.countrySearchText });
+            await this.getFiveDayWeatherForecast({ 'city': this.citySearchText, 'state': this.stateSearchText, 'country': this.countrySearchText });
             this.loading = false;
         },
         handleReset() {

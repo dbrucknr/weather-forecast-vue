@@ -9,7 +9,7 @@ export default new Vuex.Store({
     weatherForecast: weatherModule
   },
   state: {
-    usingAutoLocation: true,
+    usingAutoLocation: false,
     browserLocationData: {},
     geoEncodedLookupData: {},
     urls: {
@@ -39,9 +39,6 @@ export default new Vuex.Store({
           }, 
           console.log
         );
-       } 
-       else {
-        commit('setUsingAutoLocation', false)
        } 
     },
     extractCoordinates({ commit, getters }, payload) {
