@@ -13,7 +13,7 @@
     <b-card v-if="Object.keys(fiveDayWeatherForecast).length" title="5 Day Forecast" :sub-title="cityStateLocation ? cityStateLocation.city + ', ' + cityStateLocation.principalSubdivision : null">
       <div v-for="(day, index) in sortedWeekdays" :key="index">
         <b-card v-if="day.weatherData.length" :title="day.label" :sub-title="day.date" style="max-height: 70%">
-          <weekday-weather-card :weekdayWeather="weekdays.Monday" />
+          <weekday-weather-card :weekdayWeather="day.weatherData" />
         </b-card>
       </div>
     </b-card>
@@ -45,8 +45,7 @@ export default {
           4: 'Thursday',
           5: 'Friday',
           6: 'Saturday'
-        },
-        uniqueTimes: []
+        }
       }
     },
     components: {

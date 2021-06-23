@@ -1,8 +1,8 @@
 <template>
     <div>
         <b-card-group deck>
-        <div v-for="hourlyForecast in weekdayWeather.weatherData" :key="hourlyForecast.dt">
-            <b-card 
+        <div v-for="hourlyForecast in weekdayWeather" :key="hourlyForecast.dt">
+            <b-card
                 :title="hourlyForecast.dt_txt | convertToHours" 
                 :sub-title="hourlyForecast.weather[0].main"
                 class="overflow-hidden" 
