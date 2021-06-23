@@ -12,8 +12,8 @@
     </b-overlay>
     <b-card v-if="Object.keys(fiveDayWeatherForecast).length" title="5 Day Forecast" :sub-title="cityStateLocation ? cityStateLocation.city + ', ' + cityStateLocation.principalSubdivision : null">
       <div v-for="(day, index) in sortedWeekdays" :key="index">
-        <b-card v-if="day.weatherData.length" :title="day.label" :sub-title="day.date" style="max-height: 70%">
-          <weekday-weather-card :weekdayWeather="day.weatherData" />
+        <b-card v-if="day.weatherData.length && !isToday(day.date)" :title="day.label" :sub-title="day.date" style="max-height: 70%">
+          <weekday-weather-card :weekdayWeather="day.weatherData" :date="day.date" />
         </b-card>
       </div>
     </b-card>
@@ -52,7 +52,10 @@ export default {
       WeekdayWeatherCard
     },
     methods: {
-      ...mapActions('weatherForecast', ['getFiveDayWeatherForecast'])
+      ...mapActions('weatherForecast', ['getFiveDayWeatherForecast']),
+      isToday(date) {
+          return date == moment().format('MMMM Do YYYY')
+      }
     },
     computed: {
       ...mapGetters('weatherForecast', ['fiveDayWeatherForecast']),

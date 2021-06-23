@@ -30,7 +30,7 @@ import { mapState } from "vuex";
 
 export default {
     name: 'WeekdayWeatherCard',
-    props: ['weekdayWeather'],
+    props: ['weekdayWeather', 'date'],
     filters: {
         convertToHours (date) {
             return moment(date).format('h:mm a');
