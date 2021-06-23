@@ -12,8 +12,8 @@
     </b-overlay>
     <b-card v-if="Object.keys(fiveDayWeatherForecast).length" title="5 Day Forecast" :sub-title="cityStateLocation ? cityStateLocation.city + ', ' + cityStateLocation.principalSubdivision : null">
       <div v-for="(day, index) in sortedWeekdays" :key="index">
-        <b-card v-if="day.weatherData.length && !isToday(day.date)" :title="day.label" :sub-title="day.date" style="max-height: 70%">
-          <weekday-weather-card :weekdayWeather="day.weatherData" :date="day.date" />
+        <b-card v-if="day.weatherData.length && !isToday(day)" :title="day.label" :sub-title="day.date" style="max-height: 70%">
+          <weekday-weather-card :weekdayWeather="day.weatherData" />
         </b-card>
       </div>
     </b-card>
@@ -30,7 +30,7 @@
 
 <script>
 import moment from 'moment'; 
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 import WeekdayWeatherCard from './WeekdayWeatherCard.vue'
 
 export default {
@@ -53,8 +53,10 @@ export default {
     },
     methods: {
       ...mapActions('weatherForecast', ['getFiveDayWeatherForecast']),
-      isToday(date) {
-          return date == moment().format('MMMM Do YYYY')
+      ...mapMutations('weatherForecast', ['setTodaysRemainingForecast']),
+      isToday(day) {
+        if (day.date == moment().format('MMMM Do YYYY')) { this.setTodaysRemainingForecast(day) }
+        return day.date == moment().format('MMMM Do YYYY')
       }
     },
     computed: {

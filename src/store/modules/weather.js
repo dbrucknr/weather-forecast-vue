@@ -18,6 +18,7 @@ export const weatherModule = {
         },
         currentWeatherForecast: {},
         fiveDayWeatherForecast: [],
+        todaysRemainingForecast: [],
         cityInput: '',
         stateInput: '',
         countryInput: 'US'
@@ -37,6 +38,9 @@ export const weatherModule = {
         },
         setCountryInput(state, payload) {
             state.countryInput = payload
+        },
+        setTodaysRemainingForecast(state, payload) {
+            state.todaysRemainingForecast = payload
         }
     },
     getters: {
@@ -44,7 +48,8 @@ export const weatherModule = {
         fiveDayWeatherForecast: state => { return state.fiveDayWeatherForecast },
         getCitySearchText: state => { return state.cityInput },
         getStateSearchText: state => { return state.stateInput },
-        getCountrySearchText: state => {return state.countryInput }
+        getCountrySearchText: state => {return state.countryInput },
+        getTodaysRemainingForecast: state => { return state.todaysRemainingForecast }
     },
     actions: {
         async getCurrentWeatherForecast({ commit, state }, payload) {
