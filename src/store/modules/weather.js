@@ -2,18 +2,18 @@ export const weatherModule = {
     namespaced: true, 
     state: {
         urls: {
-            currentWeatherForecastCityStateURL: (cityName, stateCode, countryCode, APIkey) => 
+            currentWeatherForecastCityStateURL: (cityName, stateCode=null, countryCode, APIkey) => 
                 `https://api.openweathermap.org/data/2.5/weather?q=${ cityName },${ stateCode },${ countryCode },&units=imperial&APPID=${ APIkey }`,
 
             currentWeatherForecastLatLonURL: (latitude, longitude, APIkey) => 
                 `https://api.openweathermap.org/data/2.5/weather?lat=${ latitude }&lon=${ longitude }&units=imperial&APPID=${ APIkey }`,
 
-            fiveDayWeatherForecastCityStateURL: (cityName, stateCode, countryCode, APIkey) => 
+            fiveDayWeatherForecastCityStateURL: (cityName, stateCode=null, countryCode, APIkey) => 
                 `https://api.openweathermap.org/data/2.5/forecast?q=${ cityName },${ stateCode },${ countryCode },us&units=imperial&APPID=${ APIkey }`,
 
             fiveDayWeatherForecastLatLonURL: (latitude, longitude, APIkey) => 
                 `https://api.openweathermap.org/data/2.5/forecast?lat=${ latitude }&lon=${ longitude }&units=imperial&APPID=${ APIkey }`,
-                
+
             weatherForecastIconURL: (iconCode) => `http://openweathermap.org/img/wn/${ iconCode }@2x.png`
         },
         currentWeatherForecast: {},
